@@ -1,0 +1,202 @@
+.mb-10{
+    margin-bottom: 10px !important;
+}
+.mb-20{
+    margin-bottom: 20px !important;
+}
+.mb-30{
+    margin-bottom: 30px !important;
+}
+.mb-40{
+    margin-bottom: 40px !important;
+}
+.mb-50{
+    margin-bottom: 50px !important;
+}
+.mb-60{
+    margin-bottom: 60px !important;
+}
+.mb-70{
+    margin-bottom: 70px !important;
+}
+.mb-80{
+    margin-bottom: 80px !important;
+}
+.mb-90{
+    margin-bottom: 90px !important;
+}
+.mb-100{
+    margin-bottom: 100px !important;
+}
+.mb-120{
+    margin-bottom: 120px !important;
+}
+.mt-meio{
+    margin-top: 50px !important;
+}
+.bg-change {
+    background-color: #0055e4 !important;
+}
+.mt-10{
+    margin-top: 10px !important;
+}
+.mt-20{
+    margin-top: 20px !important;
+}
+.mt-30{
+    margin-top: 30px !important;
+}
+.mt-40{
+    margin-top: 40px !important;
+}
+.mt-50{
+    margin-top: 50px !important;
+}
+.mt-601{
+    margin-top: 60px !important;
+    background-color: #0055e4;
+}
+.mt-70{
+    margin-top: 70px !important;
+}
+.mt-80{
+    margin-top: 80px !important;
+}
+.mt-90{
+    margin-top: 90px !important;
+}
+.mt-100{
+    margin-top: 100px !important;
+}
+.mt-120{
+    margin-top: 120px !important;
+}
+body{
+    color: #000;
+    font-family: "Poppins", sans-serif;
+}
+p{
+    font-family: "Lato", sans-serif;
+}
+.navbar{
+    min-height: auto;
+    padding: 10px;
+    background: #fff;
+}
+.navbar-brand{
+    padding: 0px;
+    height: auto;
+}
+.navbar-right {
+    padding-top: 30px;
+}
+.logo{
+    max-width: 260px;
+}
+.nav>li>a{
+    color: #0055e4;
+}
+.nav-pills>li.active>a{
+    background-color: #0055e4;
+}
+.mt-inicio{
+    margin-top: 15%;
+}
+.w-100{
+    width: 100%;
+}
+.atencao {
+    font-size: 64px;
+    font-weight: bold;
+    text-shadow: 2px 3px 4px #afafaf;
+}
+.texto-titulo {
+    font-size: 24px;
+}
+.titulo-situacao {
+    font-weight: 900;
+}
+.texto-alerta {
+    font-size: 16px;
+}
+.btn-default {
+    color: #fff;
+    background-color: #000;
+    border-color: #000;
+}
+.btn-default:hover,
+.btn-default:active {
+    background-color: #0055e4;
+    border-color: #0055e4;
+    color: #fff;
+}
+
+.box-info {
+    padding: 15px;
+    border-radius: 5px;
+    -webkit-box-shadow:  1px 1px 5px 1px rgba(215,215,215,0.75);
+    -moz-box-shadow: 1px 1px 5px 1px rgba(215,215,215,0.75);
+    box-shadow: 1px 1px 5px 1px rgba(215,215,215,0.75);
+}
+
+.box-info p {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 0px;
+}
+.situacao-info {
+    text-transform: uppercase;
+}
+.box-info h1 {
+    font-size: 34px;
+    font-weight: 600;
+    margin: 10px 0px;
+}
+.box-info span {
+    font-size: 14px;
+    color: #828282;
+    font-weight: 600;
+}
+
+.bairro-info {
+    margin: 20px 0px;
+}
+
+.img-bairro {
+    padding-right: 10px;
+    width: 45px;
+}
+
+.bairro-info span {
+    color: #000;
+}
+
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+    padding: 10px 8px;
+}
+
+.form-control{
+    padding: 23px !important;
+}
+
+.btn-lg{
+    padding: 11px;
+    background-color: #0055e4;
+}
+
+.footer{
+    background-color: #0055e4;
+    padding: 30px 0px;
+}
+
+.footer p{
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+@media(max-width: 767px){
+    .mt-inicio{
+        margin-top: 120px;
+    }
+}
