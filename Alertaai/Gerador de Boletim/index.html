@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Boletim Defesa Civil</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-800 p-4">
+    <div class="max-w-3xl mx-auto bg-white rounded-xl shadow-md p-6 space-y-6">
+        <div class="text-center">
+            <img src="static/sample_0.png" alt="Banner Defesa Civil" class="mx-auto max-w-full h-auto">
+            <h1 class="text-2xl font-bold mt-4">Gerador de Boletins da Defesa Civil</h1>
+        </div>
+
+        <form id="imageForm" class="space-y-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <input type="text" id="nivelRio" placeholder="Nível do Rio" class="border p-2 rounded">
+                <input type="text" id="horaLeitura" placeholder="Hora e Data da Leitura (16:00 28 de junho)" class="border p-2 rounded">
+                <select id="cotaAtual" class="border p-2 rounded">
+                    <option value="">Cota Atual</option>
+                    <option value="Normal">Normal</option>
+                    <option value="Atenção">Atenção</option>
+                    <option value="Alerta">Alerta</option>
+                    <option value="Inundação">Inundação</option>
+                </select>
+                <select id="estadoNivel" class="border p-2 rounded">
+                    <option value="">Estado do Nível</option>
+                    <option value="Crescendo">Crescendo</option>
+                    <option value="Baixando">Baixando</option>
+                    <option value="Estacionado">Estacionado</option>
+                </select>
+                <input type="text" id="desabrigados" min="0" placeholder="Desabrigados" class="border p-2 rounded">
+                <input type="text" id="desalojados" min="0" placeholder="Desalojados" class="border p-2 rounded">
+                <input type="text" id="afetadosTotal" min="0" placeholder="Total de Afetados" class="border p-2 rounded">
+            </div>
+            <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Gerar Imagem</button>
+        </form>
+
+        <div id="previewArea" class="text-center">
+            <h2 class="text-xl font-semibold mb-2">Prévia do Boletim</h2>
+            <canvas id="imageCanvas" width="1890" height="2363" class="mx-auto border shadow w-full max-w-[500px] h-auto"/>
+        </div>
+
+        <div class="flex flex-col sm:flex-row justify-center gap-4 mt-4">
+            <button id="downloadLink" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 hidden">Baixar Imagem</button>
+            <button id="whatsappBtn" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 hidden">Enviar via WhatsApp</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.getElementById('imageForm');
+            const canvas = document.getElementById('imageCanvas');
+            const ctx = canvas.getContext('2d');
+            const downloadBtn = document.getElementById('downloadLink');
+            const whatsappBtn = document.getElementById('whatsappBtn');
+
+            form.addEventListener('submit', function (event) {
+                event.preventDefault();
+                const banner = new Image();
+                banner.src = 'static/backbanner3.png';
+                banner.onload = function () {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    ctx.drawImage(banner, 0, 0, canvas.width, canvas.height);
+
+                    const nivelRio = document.getElementById('nivelRio').value;
+                    const estadoNivel = document.getElementById('estadoNivel').value;
+                    const horaLeitura = document.getElementById('horaLeitura').value;
+                    const cotaAtual = document.getElementById('cotaAtual').value;
+                    const desabrigados = document.getElementById('desabrigados').value;
+                    const desalojados = document.getElementById('desalojados').value;
+                    const afetadosTotal= document.getElementById('afetadosTotal').value;
+
+                    ctx.fillStyle = '#222';
+                    ctx.font = 'bold 90px Arial';
+                    ctx.fillText(nivelRio + ' m' , 236, 830);
+                    ctx.font = 'bold 80px Arial';
+                    ctx.fillText(estadoNivel, 236, 945);
+                    ctx.font = 'bold 50px Arial';
+                    ctx.fillText(horaLeitura, 236, 1330);
+                    ctx.font = 'bold 90px Arial';
+                    ctx.fillText(cotaAtual, 236, 1135);
+                    ctx.font = 'bold 55px Arial';
+                    ctx.fillText(desabrigados + ' Pessoas Desabrigadas.', 900, 1850);
+                    ctx.fillText(desalojados + ' Pessoas Desalojadas.', 900, 1950);
+                    ctx.fillText(afetadosTotal + ' Pessoas Afetadas.', 900, 2050);
+                    
+                    const maxWidth = 900;
+                    const lineHeight = 32;
+                    let y = 746;
+                    
+
+                
+
+                    // Ativa botões de ação
+                    downloadBtn.classList.remove('hidden');
+                    whatsappBtn.classList.remove('hidden');
+                };
+            });
+
+            downloadBtn.addEventListener('click', function () {
+                const dataURL = canvas.toDataURL('image/png');
+                const a = document.createElement('a');
+                a.href = dataURL;
+                a.download = 'boletim_gerado.png';
+                a.click();
+            });
+
+            whatsappBtn.addEventListener('click', function () {
+                canvas.toBlob(function (blob) {
+                    const file = new File([blob], "boletim.png", { type: "image/png" });
+
+                    // Verifica suporte à Web Share API (apenas em dispositivos móveis)
+                    if (navigator.canShare && navigator.canShare({ files: [file] })) {
+                        navigator.share({
+                            files: [file],
+                            title: "Boletim Defesa Civil",
+                            text: "Confira o boletim da situação atual do rio.",
+                        });
+                    } else {
+                        // Fallback: abre link de WhatsApp com texto (sem imagem)
+                        const texto = encodeURIComponent("Boletim Defesa Civil:\n" +
+                            document.getElementById('nivelRio').value + "M, " +
+                            document.getElementById('horaLeitura').value + ", " +
+                            "Cota: " + document.getElementById('cotaAtual').value + "\n" +
+                            "Desabrigados: " + document.getElementById('desabrigados').value + "\n" +
+                            "Desalojados: " + document.getElementById('desalojados').value + "\n" +
+                            "Afetados: " + document.getElementById('afetados').value);
+                        window.open("https://wa.me/?text=" + texto, '_blank');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
